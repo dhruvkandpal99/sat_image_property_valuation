@@ -2,7 +2,7 @@
 
 This project integrates traditional tabular real estate data (square footage, location, etc.) with **visual signals extracted from satellite imagery** to predict house prices.
 
-While standard Deep Learning (ResNet) struggled with high-dimensional noise, we successfully utilized **Explicit Feature Engineering** (Computer Vision via OpenCV) to extract interpretable metrics—such as Vegetation Index, Water Presence, and Edge Density—to quantify "Curb Appeal."
+While standard Deep Learning (ResNet) struggled with high-dimensional noise, we successfully utilized **Explicit Feature Engineering** (Computer Vision via OpenCV) to extract interpretable metrics — such as Vegetation Index, Water Presence, and Edge Density — to quantify "Curb Appeal."
 
 **Final Result:** The Ensemble Model achieved an **R² of ~0.89**, outperforming the tabular baseline.
 
@@ -11,10 +11,10 @@ While standard Deep Learning (ResNet) struggled with high-dimensional noise, we 
 | File | Description |
 | --- | --- |
 | `main.ipynb` | **Main Notebook**. Contains EDA, Image Feature Extraction (OpenCV), Model Training (XGBoost), and Grad-CAM Analysis. |
-| `data_fetcher.py` | Script to download satellite imagery tiles (Zoom Level 18) based on Lat/Long coordinates in the CSVs. |
-| `audit_coordinates.py` | Utility script to verify downloaded images and identify corrupt/0KB files. |
-| `missing_data.py` | Helper script to handle missing values or skipped downloads. |
-| `coordinate_to_url_test.py` | Unit test to verify the logic converting Lat/Long to Map Tile URLs. |
+| `audit_coordinates.py` | **Validation Script**. Runs first to verify that all Lat/Long coordinates in the CSVs are valid before attempting downloads. |
+| `coordinate_to_url_test.py` | **Diagnostic Tool**. Checks if your IP address is blocked by the map server and verifies the tile generation logic (Lat/Long  URL) is correct. |
+| `data_fetcher.py` | **Downloader**. Fetches satellite imagery tiles (Zoom Level 18) for valid coordinates. |
+| `missing_data.py` | **Cleanup & Tracking**. Identifies images that failed to download and detects/removes corrupt (0KB/1KB) "ghost" files. |
 | `train.csv` / `test.csv` | The raw tabular dataset containing house features and IDs. |
 | `requirements.txt` | List of Python dependencies required to run the project. |
 
@@ -22,8 +22,8 @@ While standard Deep Learning (ResNet) struggled with high-dimensional noise, we 
 
 1. **Clone the repository:**
 ```bash
-git clone https://github.com/yourusername/sat_image_property_valuation.git
-cd sat_image_property_valuation
+git clone https://github.com/yourusername/your-repo-name.git
+cd your-repo-name
 
 ```
 
@@ -38,28 +38,41 @@ pip install -r requirements.txt
 
 ## 🛠️ Usage Guide
 
-### Step 1: Download Satellite Imagery
+### Step 1: Pre-Download Checks
 
-Before training, you need to fetch the images corresponding to the house coordinates.
-
-```bash
-python data_fetcher.py
-
-```
-
-* *Note:* This script handles rate limiting and header rotation to download tiles from the map server.
-* *Output:* Creates an `images/` directory with `train/` and `test/` subfolders.
-
-### Step 2: Audit Data (Optional)
-
-Ensure all images downloaded correctly and remove empty files.
+First, ensure your coordinate data is valid:
 
 ```bash
 python audit_coordinates.py
 
 ```
 
-### Step 3: Train & Analyze
+Then, run a connection test to ensure your IP isn't banned and the tile logic works:
+
+```bash
+python coordinate_to_url_test.py
+
+```
+
+### Step 2: Download Satellite Imagery
+
+Fetch the images. This script handles rate limiting and header rotation.
+
+```bash
+python data_fetcher.py
+
+```
+
+### Step 3: Verify Integrity
+
+After downloading, check for missing files or corrupt (0KB) downloads that need to be retried:
+
+```bash
+python missing_data.py
+
+```
+
+### Step 4: Train & Analyze
 
 Open the main notebook to run the full pipeline:
 
