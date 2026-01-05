@@ -1,0 +1,29 @@
+# --- Core Data Science & Math ---
+numpy
+pandas
+scikit-learn
+
+# --- Visualization & EDA ---
+matplotlib
+seaborn
+
+# --- Deep Learning (PyTorch) ---
+torch
+torchvision
+
+# --- Machine Learning (Gradient Boosting) ---
+xgboost
+
+# --- Image Processing & Computer Vision ---
+opencv-python
+Pillow
+
+# --- Explainability (Grad-CAM) ---
+grad-cam
+
+# --- Utilities & Progress Bars ---
+tqdm
+
+# --- Geo-Spatial & Data Fetching (For your scraper) ---
+requests
+mercantile
