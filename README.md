@@ -22,8 +22,8 @@ While standard Deep Learning (ResNet) struggled with high-dimensional noise, we 
 
 1. **Clone the repository:**
 ```bash
-git clone https://github.com/yourusername/your-repo-name.git
-cd your-repo-name
+git clone https://github.com/dhruvkandpal99/sat_image_property_valuation.git
+cd sat_image_property_valuation
 
 ```
 
