@@ -10,7 +10,7 @@ While standard Deep Learning (ResNet) struggled with high-dimensional noise, we 
 
 | File | Description |
 | --- | --- |
-| `cdcSubmission.ipynb` | **Main Notebook**. Contains EDA, Image Feature Extraction (OpenCV), Model Training (XGBoost), and Grad-CAM Analysis. |
+| `main.ipynb` | **Main Notebook**. Contains EDA, Image Feature Extraction (OpenCV), Model Training (XGBoost), and Grad-CAM Analysis. |
 | `data_fetcher.py` | Script to download satellite imagery tiles (Zoom Level 18) based on Lat/Long coordinates in the CSVs. |
 | `audit_coordinates.py` | Utility script to verify downloaded images and identify corrupt/0KB files. |
 | `missing_data.py` | Helper script to handle missing values or skipped downloads. |
@@ -64,7 +64,7 @@ python audit_coordinates.py
 Open the main notebook to run the full pipeline:
 
 ```bash
-jupyter notebook cdcSubmission.ipynb
+jupyter notebook main.ipynb
 
 ```
 
